@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Donation App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto p-4">
+    <h1 class="text-4xl font-bold text-center mb-4">Donate to Needy People</h1>
+
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <form action="/donate" class="space-y-4" method="POST">
+        <div>
+          <label class="block text-sm font-medium text-gray-700" for="name">Name</label>
+          <input class="mt-1 block w-full p-2 border border-gray-300 rounded-md" id="name" name="name" required="" type="text"/>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700" for="amount">Amount (Minimum ₹30)</label>
+          <input class="mt-1 block w-full p-2 border border-gray-300 rounded-md" id="amount" min="30" name="amount" required="" type="number"/>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700" for="upi_id">UPI ID</label>
+          <input class="mt-1 block w-full p-2 border border-gray-300 rounded-md" id="upi_id" name="upi_id" required="" type="text"/>
+        </div>
+        <button class="w-full bg-blue-500 text-white p-2 rounded-md" type="submit">Donate</button>
+      </form>
+    </div>
+
+    <div class="mt-8">
+      <h2 class="text-2xl font-bold mb-4">Donation History</h2>
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead>
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">UPI ID</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            {% for donation in donations %}
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">{{ donation[1] }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">₹{{ donation[2] }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ donation[3] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <h2 class="text-2xl font-bold mb-4">Total Donations: ₹{{ total_donations }}</h2>
+    </div>
+
+    <div class="mt-8">
+      <h2 class="text-2xl font-bold mb-4">Needy People</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Images of needy people, as already provided in your frontend -->
+        <div class="bg-white p-4 rounded-lg shadow-lg">
+          <img alt="Image of a needy person in a rural area" class="w-full h-48 object-cover rounded-md" src="https://storage.googleapis.com/a1aa/image/nuDt4nNeOT2KBSmmLe10h0GjNGx6vJ3zZSA7ogPSasuMd1BUA.jpg"/>
+          <h3 class="text-xl font-bold mt-4">Person 1</h3>
+          <p class="text-gray-600">Description of the needy person and their situation.</p>
+        </div>
+        <!-- Add more images similarly -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>
